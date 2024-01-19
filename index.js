@@ -1,4 +1,30 @@
-// Stockholms värder
+// Stockholms värder'
+
+var requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("https://newsapi.org/v2/top-headlines?country=se&apiKey=28600a09ba934043a13b4602d42f9639", requestOptions)
+  .then(response => response.json())
+  .then(result => {
+    console.log(result)
+    const news =result. articles.slice(0,9)
+    var divElement = document.getElementById("add");
+
+    for (var i = 0; i < news.length; i++) {
+        var pElement = document.createElement("div");
+
+        pElement.textContent = news[i].title;
+
+        pElement.className = 'iconcontainer_news'
+        divElement.appendChild(pElement);
+    }
+
+  })
+  .catch(error => console.log('error', error));
+
+
 async function getWeather(){
   const res = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Stockholm&appid=8102f14f4c80b2bf57eb41a0c18b3cc7&units=metric');
   const data = await res.json();
@@ -41,6 +67,7 @@ async function getTokyoWeather(){
     iconcontainer5.innerHTML += '<i class="fas fa-cloud"></i>';
   }
 }
+
 
 getTokyoWeather();
 
@@ -139,7 +166,25 @@ dashboardNameText.addEventListener('input', function(){
   localStorage.dashboardNameText = dashboardNameText.value; // Skriv i lager vad som i texten 
 });
 
+// Ändra BG bild vid klick 
+function Changeimg(){
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  
+  fetch("https://api.unsplash.com/photos/random?client_id=RTkeSR6sQnhsIQmDt0fSFFSUZm15m8xf_oFNIFymPwk", requestOptions)
+    .then(response => response.json())
+    .then(result => {
+      //Spara bild länken
+      const newLink = result.urls.full;
 
+      // Byta BG i html 
+      const body = document.body;
+      body.style.backgroundImage = 'url('+newLink+')';
 
+    })
+    .catch(error => console.log('error', error));
+}
 
 
