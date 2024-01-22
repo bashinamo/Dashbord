@@ -9,11 +9,11 @@ fetch("https://newsapi.org/v2/top-headlines?country=se&apiKey=28600a09ba934043a1
   .then(response => response.json())
   .then(result => {
     console.log(result)
-    const news =result. articles.slice(0,9)
-    var divElement = document.getElementById("add");
+    const news =result. articles.slice(0,7)
+    let divElement = document.getElementById("add");
 
-    for (var i = 0; i < news.length; i++) {
-        var pElement = document.createElement("div");
+    for (let i = 0; i < news.length; i++) {
+        let pElement = document.createElement("div");
 
         pElement.textContent = news[i].title;
 
@@ -122,11 +122,6 @@ setInterval(updateClock, 1000);
       function iconcontainer3(){
         window.location.href = 'https://github.com/';
       }
-
-    // Vädret
-
-    
-    // lägga till
     
 
     // anteckningar
@@ -168,7 +163,7 @@ dashboardNameText.addEventListener('input', function(){
 
 // Ändra BG bild vid klick 
 function Changeimg(){
-  var requestOptions = {
+  let requestOptions = {
     method: 'GET',
     redirect: 'follow'
   };
@@ -188,3 +183,33 @@ function Changeimg(){
 }
 
 
+
+
+
+
+const addpage = document.getElementById("addPageButton");
+const myModal = document.getElementById("myModal");
+const close = document.getElementsByClassName("close")[0]
+
+addpage.onclick = function() {
+  myModal.style.display = "block";
+}
+  
+//  // När användaren klickar på (x), stäng modalen
+close.onclick = function() {
+  myModal.style.display = "none";
+}
+
+
+
+function setLink(){
+  let linkAdress = 'https://' + linkText.value;
+  let newLink = `
+  <div class="iconcontainer" onclick="${location.href = linkAdress}">
+    <i class="fas fa-link" style="color: #df452a;"></i>
+    <p>${titleText.value}</p>
+  </div> 
+  `;
+  document.querySelector('.linkWrapper').innerHTML += newLink;
+  document.querySelector('.linkWrapper').scrollTop = document.querySelector('.linkWrapper').scrollHeight;
+}
