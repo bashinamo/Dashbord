@@ -203,13 +203,20 @@ close.onclick = function() {
 
 
 function setLink(){
-  let linkAdress = 'https://' + linkText.value;
+  let idName = Date.now();
   let newLink = `
-  <div class="iconcontainer" onclick="${location.href = linkAdress}">
+  <div class="iconcontainer" id=${idName}>
     <i class="fas fa-link" style="color: #df452a;"></i>
     <p>${titleText.value}</p>
   </div> 
   `;
   document.querySelector('.linkWrapper').innerHTML += newLink;
   document.querySelector('.linkWrapper').scrollTop = document.querySelector('.linkWrapper').scrollHeight;
+  document.getElementById(idName).link = linkText.value
 }
+
+document.addEventListener('click', function(evt){
+  if(evt.target.className == 'iconcontainer'){
+    window.open("https://" + document.getElementById(evt.target.id).link);
+  }
+});
